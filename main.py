@@ -19,33 +19,35 @@ class connections:
             print("Connection to mysql successful")
         except Error as e:
             print("The error '{}' occurred".format(e))
+class queries:
+    def execute(self,table_name,mode,database_query,connector):
+        self.table_name=table_name
+        self.mode=mode
+        self.database_query=database_query
+        cursor=connector.connection.cursor()
+        result = None
+        try:
+            cursor.execute(database_query)
+            result=cursor.fetchall()
+            connector.connection.commit()
+        except Error as e:
+            print("The error '{}' occurred".format(e))
+            result="error"
+        if (mode=="insertion"):
+            cursor.commit();
+        return result
+        
+
+
 root_connection=connections();
 root_connection.create_connection("localhost","3306","admin","password","sand")
-def insertion_query(connector,database_query):
-    cursor=connector.connection.cursor()
-    result = None
-    try:
-        cursor.execute(database_query)
-        result=cursor.fetchall()
-        connector.connection.commit()
-        return result
-    except Error as e:
-        print("The error '{}' occurred".format(e))
-        return "error"
-def selection_query(connector,database_query):
-    cursor=connector.connection.cursor()
-    result =None
-    try:
-        cursor.execute(database_query)      
-        result =cursor.fetchall()
-        return result        
-    except Error as e:
-        print("The error '{}' occurred".format(e))
-        return "error"
-command = "select * from tab;"
-print(selection_query(root_connection, command))
-command ="desc tab;"
-print (selection_query(root_connection,command))
-tups=selection_query(root_connection, command)
-
-
+query_buffer=queries()
+statement=query_buffer.execute("tabs","selection","select * from tab;",root_connection);
+print (statement)
+def parse_result(connector,query):
+    if (query.result=="error"):
+        #do something about it later
+        print("error")
+    else :
+        print(query.result)
+    
