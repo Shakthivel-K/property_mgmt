@@ -1,3 +1,4 @@
+from logging import root
 import mysql.connector
 from mysql.connector import Error
 class connections:
@@ -35,7 +36,20 @@ class queries:
             self.result="error"
         if (mode=="insertion"):
             cursor.commit();
-        return self.result        
+        return self.result    
+class results:
+    def __init__(self,header,query):
+        self.header=header
+        self.query=query  
+        self.degree=len(header)
+        self.cardinality=len(query.result)
+
+    def display_cmd(self):
+        for i in self.header:
+            print(i,end='\t')
+        print('\n')
+        ##write functions as per requirement
+        
 
 
 root_connection=connections();
@@ -51,6 +65,12 @@ def parse_result(connector,query):
         num_attributes=len(query.execute(query.table_name,"selection","desc "+query.table_name+";",connector))
         table_data_query=queries()
         table_data_query.execute("information_schema.columns","selection","select column_name from information_schema.columns where table_name = \""+query.table_name+"\";",connector)
-        print(table_data_query.result)
-parse_result(root_connection,query_buffer)
+        header=()
+        for i in range(0,num_attributes,1):
+            header+=table_data_query.result[i]
+        res=results(header,query)
+        return res
+
+parse_result(root_connection,query_buffer).display_cmd()
+
     
