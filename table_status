@@ -1,0 +1,11 @@
+admin table conforms to 3.5nf
+bank_acc_info table conforms to 3.5nf
+payment table conforms to 3.5nf
+admin_clearance table conforms to 3.5nf
+approval table conforms to 3.5nf
+buyer table conforms to 3.5nf
+rental table conforms to 3.5nf
+property_bidding table conforms to 3.5nf
+registration table conforms to 3.5nf
+property table conforms to 3.5nf
+------further ,all tables conform to 3.5nf-----------
