@@ -25,29 +25,32 @@ class queries:
         self.mode=mode
         self.database_query=database_query
         cursor=connector.connection.cursor()
-        result = None
+        self.result = None
         try:
             cursor.execute(database_query)
-            result=cursor.fetchall()
+            self.result=cursor.fetchall()
             connector.connection.commit()
         except Error as e:
             print("The error '{}' occurred".format(e))
-            result="error"
+            self.result="error"
         if (mode=="insertion"):
             cursor.commit();
-        return result
-        
+        return self.result        
 
 
 root_connection=connections();
 root_connection.create_connection("localhost","3306","admin","password","sand")
 query_buffer=queries()
-statement=query_buffer.execute("tabs","selection","select * from tab;",root_connection);
-print (statement)
+query_buffer.execute("tab","selection","desc tab;",root_connection);
+#print (query_buffer.result)
 def parse_result(connector,query):
     if (query.result=="error"):
         #do something about it later
         print("error")
     else :
-        print(query.result)
+        num_attributes=len(query.execute(query.table_name,"selection","desc "+query.table_name+";",connector))
+        table_data_query=queries()
+        table_data_query.execute("information_schema.columns","selection","select column_name from information_schema.columns where table_name = \""+query.table_name+"\";",connector)
+        print(table_data_query.result)
+parse_result(root_connection,query_buffer)
     
