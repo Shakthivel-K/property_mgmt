@@ -48,6 +48,9 @@ class results:
         for i in self.header:
             print(i,end='\t')
         print('\n')
+        for i in self.query.result:
+            print(i,end='\t')
+        print('\n')
         ##write functions as per requirement
         
 
@@ -55,14 +58,15 @@ class results:
 root_connection=connections();
 root_connection.create_connection("localhost","3306","admin","password","sand")
 query_buffer=queries()
-query_buffer.execute("tab","selection","desc tab;",root_connection);
+query_buffer.execute("tab","selection","select * from tab;",root_connection);
 #print (query_buffer.result)
 def parse_result(connector,query):
     if (query.result=="error"):
         #do something about it later
         print("error")
     else :
-        num_attributes=len(query.execute(query.table_name,"selection","desc "+query.table_name+";",connector))
+        query1=queries()
+        num_attributes=len(query1.execute(query.table_name,"selection","desc "+query.table_name+";",connector))
         table_data_query=queries()
         table_data_query.execute("information_schema.columns","selection","select column_name from information_schema.columns where table_name = \""+query.table_name+"\";",connector)
         header=()
