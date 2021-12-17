@@ -1,6 +1,9 @@
 from logging import root
 import mysql.connector
 from mysql.connector import Error
+def log_message(msg):
+    file=open("message.txt")
+    file.write(msg)
 class connections:
     def create_connection(self,host_name,port_name,user_name,user_password,db_name):
         self.connection=None
@@ -52,8 +55,6 @@ class results:
             print(i,end='\t')
         print('\n')
         ##write functions as per requirement
-        
-
 
 root_connection=connections();
 root_connection.create_connection("localhost","3306","admin","password","sand")
@@ -62,7 +63,7 @@ query_buffer.execute("tab","selection","select * from tab;",root_connection);
 #print (query_buffer.result)
 def parse_result(connector,query):
     if (query.result=="error"):
-        #do something about it later
+        return []
         print("error")
     else :
         query1=queries()
