@@ -1,0 +1,39 @@
+create table admin
+(
+    admin_code varchar(45) primary key not null unique,
+    name varchar(20) not null,
+    phone_number_code varchar(45) not null unique foreign key references phone_number(phone_number_code),
+    aadhar_number varchar(12) not null unique,
+    image varchar(100) not null,
+    aadhar_card varchar(100) not null,
+    office_location varchar(20) not null,
+    personal_address_code not null foreign key references address(personal_address_code),
+    email varchar(25)
+);
+
+create table bank_acc_info
+(
+    search_code varchar(45) primary key not null unique,
+    acc_hldr_code varchar(45) not null,
+    account_number varchar(45) not null,
+    credit_score decimal not null,
+    app_admin_code varchar(45) not null foreign key references admin(admin_code)
+    bank_code varchar(45) not null,
+    verification_status varchar(45)
+);
+
+create table payment
+(
+transaction_code varchar(45) not null unique primary key,
+buyer_code varchar(45) not null foreign key references buyer(buyer_code),
+approval_code varchar(45) not null foreign key references  approval(approval_code),
+transaction_type varchar (45) not null,
+time_of_transfer time not null,
+date_of_transfer time not null,
+buyer_acc_scode varchar(45) not null foreign key references bank_acc_info(search_code),
+owner_acc_scode varchar(45) not null foreign key references bank_acc_info(search_code)
+approval_status varchar(45) ,
+property_code varchar(45) not null foreign key references property(property_code),
+broker_code varhcar(45) not null foreign key references broker(broker_code),
+owner_code varchar(45) not null foreign key references owner(owner_code)
+);
