@@ -1,6 +1,3 @@
-drop database sand;
-create database sand;
-use sand;
 create table phone_number
 (
     phone_number_code varchar(45) not null primary key,
