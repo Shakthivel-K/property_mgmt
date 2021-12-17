@@ -1,214 +1,14 @@
-create table admin
-(
-    admin_code varchar(45) primary key not null unique,
-    name varchar(20) not null,
-    phone_number_code varchar(45) not null unique foreign key references phone_number(phone_number_code),
-    aadhar_number varchar(12) not null unique,
-    image varchar(100) not null,
-    aadhar_card varchar(100) not null,
-    office_location varchar(20) not null,
-    personal_address_code not null foreign key references address(personal_address_code),
-    email varchar(25)
-);
-
-create table bank_acc_info
-(
-    search_code varchar(45) primary key not null unique,
-    acc_hldr_code varchar(45) not null,
-    account_number varchar(45) not null,
-    credit_score decimal not null,
-    app_admin_code varchar(45) not null foreign key references admin(admin_code)
-    bank_code varchar(45) not null,
-    verification_status varchar(45)
-);
-
-create table payment
-(
-transaction_code varchar(45) not null unique primary key,
-buyer_code varchar(45) not null foreign key references buyer(buyer_code),
-approval_code varchar(45) not null foreign key references  approval(approval_code),
-transaction_type varchar (45) not null,
-time_of_transfer time not null,
-date_of_transfer time not null,
-buyer_acc_scode varchar(45) not null foreign key references bank_acc_info(search_code),
-owner_acc_scode varchar(45) not null foreign key references bank_acc_info(search_code)
-approval_status varchar(45) ,
-property_code varchar(45) not null foreign key references property(property_code),
-broker_code varchar(45) not null foreign key references broker(broker_code),
-owner_code varchar(45) not null foreign key references owner(owner_code)
-);
-
-create table admin_clearance
-(
-    admin_code varchar(45) not null unique primary key foreign key references admin(admin_code),
-    land_app_right integer,
-    home_app_right integer,
-    approval_cap decimal,
-    seller_app_right integer,
-    broker_elm_right integer,
-    transaction_cap decimal,
-    profile_deletion_right integer
-);
-
-create table approval
-(
-    approval_code varchar(45) not null unique primary key,
-    admin_code varchar(45) not null foreign key references admin(admin_code),
-    approval_status varchar(10) not null,
-    revision integer
-);
- 
-create table buyer
-(
-    buyer_code varchar(45) not null unique primarykey,
-    name varchar(45) not null,
-    phone_number_code varchar(45) not null unique foreign key references phone_number(phone_number_code),
-    aadhar_number varchar(12) not null unique,
-    image varchar(100) not null,
-    email varchar(25) not null
-);
-
-create table rental 
-(
-    property_subcode varchar(45) not null unique primary key,
-    property_code varchar(45) not null foreign key  references property(property_code),
-    approval_code varchar(45) not null foreign key references approval(approval_code),
-    broker_code varchar(45) foreign key references broker(broker_code),
-    security_deposit decimal not null,
-    maintenance decimal not null,
-    average_water_tax decimal not null,
-    average_eb_bill decimal not null,
-    rent_hike decimal,
-    rent decimal not null
-);
-
-create table property_bidding 
-(
-    bid_code varchar(45) not null unique primary key,
-    property_code varchar(45) not null foreign key references property(property_code),
-    approval_code varchar(45) not null unique foreign key references approval(approval_code),
-    acceptance varchar(45) not null,
-    bid_value decimal not null,
-    bid_status varchar(45) not null,
-    buyer_code varchar(45) not null foreign key references buyer(buyer_code)
-);
-
-create table registration
-(
-    registration_code varchar(45) not null unique primary key,
-    property_code varchar(45) not null foreign key references property(property_code),
-    approval_code varchar(45) not null unique foreign key references approval(approval_code),
-    transaction_code varchar(45) not null unique foreign key references payment(transaction_code),
-    date_of_reg date not null,
-    stamp_value decimal not null,
-    owner_code varchar(45) not null foreign key references owner(owner_code),
-    buyer_code varchar(45) not null foreign key references buyer(buyer_code)
-);
-
-create table tenants
-(
-    property_subcode varchar(45) not null foreign key references rental(property_subcode),
-    tenant_code varchar(45) not null unique primary key,
-    phone_number_code varchar(45) not null foreign key references phone_number(phone_number_code),
-    aadhar_number varchar(12) not null unique,
-    aadhar_card  varchar(100) ,
-    identity_proof varchar(100),
-    email varchar(25),
-    image varchar(100)
-);
-
-create table owner
-(
-    owner_code varchar(45) not null unique primary key,
-    name varchar(45) not null,
-    phone_number_code not null foreign key references phone_number(phone_number_code),
-    aadhar_number varchar(12) not null unique,
-    aadhar_card  varchar(100) ,
-    identity_proof varchar(100),
-    email varchar(25),
-    image varchar(100),
-    reliability_rating decimal
-);
-
-create table property 
-(
-    property_code varchar(45) not null unique primary key,
-    owner_code varchar(45) not null foreign key references owner(owner_code),
-    approval_code varchar(45) not null unique references approval(approval_code),
-    name varchar(45) not null,
-    address_code varchar(45) not null  foreign key references address(address_code),
-    property_type varchar(45) not null,
-    year_of_cons date,
-    broker_code varchar(45) foreign key references broker(broker_code),
-    property_image varchar(100)
-);
-
-create table coliving
-(
-    property_subcode varchar(45) not null unique primary key foreign key references rental(property_subcode),
-    property_code varchar(45) not null foreign key references property(property_code),
-    current_tenant varchar(45) not null foreign key references tenants(tenant_code),
-    broker_code varchar(45)  foreign key references  broker(broker_code)
-);
-
-create table property_documentation
-(
-    property_code varchar(45) not null unique primary key foreign key references property(property_code),
-    document_code varchar(45) not null unique,
-    document varchar(100) not null,
-    document_legitimacy varchar(45)
-);
- 
-create table geographic_advantage
-(
-    property_code varchar(45) not null unique primary key foreign key references  property(property_code),
-    market decimal,
-    school decimal,
-    airport decimal,
-    raw_materials decimal,
-    hospitals decimal,
-    clinic decimal,
-    library decimal
-);
-
-create table amenities 
-(
-    property_code varchar(45) not null unique primary key foreign key references property(property_code),
-    clubhouse integer,
-    pool integer,
-    play_ground integer,
-    assistance integer,
-    security integer
-
-);
-
-create table owner
-(
-    broker_code varchar(45) not null unique primary key,
-    name varchar(45) not null,
-    phone_number_code not null foreign key references phone_number(phone_number_code),
-    aadhar_number varchar(12) not null unique,
-    aadhar_card  varchar(100) ,
-    identity_proof varchar(100),
-    email varchar(25),
-    image varchar(100),
-    reliability_rating decimal,
-    review varchar(100)
-);
-
-create table login_info
-(
-    code varchar(45) not null unique primary  key,
-    password varchar(20) not null 
-);
-
+drop database sand;
+create database sand;
+use sand;
 create table phone_number
 (
-    key_s integer not null primary key,
-    phone_number_code varchar(45) not null,
-    phone_numbers varchar(10) not null
+    phone_number_code varchar(45) not null primary key,
+    phone_number1 varchar(10) not null,
+    phone_number2 varchar(10) not null,
+    phone_number3 varchar(10) not null
+    
 );
-
 create table address
 (
     address_code varchar(45) not null unique primary key,
@@ -217,5 +17,227 @@ create table address
     locality varchar(20) not null,
     pincode varchar(6) not null
 );
-
+create table administrator
+(
+    admin_code varchar(45) primary key not null unique,
+    name varchar(20) not null,
+    phone_number_code varchar(45) not null unique ,
+    aadhar_number varchar(12) not null unique,
+    image varchar(100) not null,
+    aadhar_card varchar(100) not null,
+    office_location varchar(20) not null,
+    personal_address_code varchar(45) not null,
+    email varchar(25),
+    foreign key (phone_number_code) references phone_number(phone_number_code),
+    foreign key (personal_address_code) references address(address_code)
+);
+create table bank_acc_info
+(
+    search_code varchar(45) primary key not null unique,
+    acc_hldr_code varchar(45) not null,
+    account_number varchar(45) not null,
+    credit_score decimal not null,
+    app_admin_code varchar(45) not null,
+    bank_code varchar(45) not null,
+    verification_status varchar(45),
+    foreign key (app_admin_code) references administrator(admin_code)
+);
+create table admin_clearance
+(
+    admin_code varchar(45) not null unique primary key,
+    land_app_right integer,
+    home_app_right integer,
+    approval_cap decimal,
+    seller_app_right integer,
+    broker_elm_right integer,
+    transaction_cap decimal,
+    profile_deletion_right integer,
+    foreign key (admin_code) references administrator(admin_code)
+);
+create table approval
+(
+    approval_code varchar(45) not null unique primary key,
+    admin_code varchar(45) not null ,
+    approval_status varchar(10) not null,
+    revision integer,
+    foreign key(admin_code) references administrator(admin_code)
+);
+create table buyer
+(
+    buyer_code varchar(45) not null unique primary key,
+    name varchar(45) not null,
+    phone_number_code varchar(45) not null unique ,
+    aadhar_number varchar(12) not null unique,
+    image varchar(100) not null,
+    email varchar(25) not null,
+    foreign key (phone_number_code) references phone_number(phone_number_code)
+);
+create table owner
+(
+    owner_code varchar(45) not null unique primary key,
+    name varchar(45) not null,
+    phone_number_code varchar(45) not null ,
+    aadhar_number varchar(12) not null unique,
+    aadhar_card  varchar(100) ,
+    identity_proof varchar(100),
+    email varchar(25),
+    image varchar(100),
+    reliability_rating decimal,
+    foreign key(phone_number_code) references phone_number(phone_number_code)
+);
+create table broker
+(
+    broker_code varchar(45) not null unique primary key,
+    name varchar(45) not null,
+    phone_number_code varchar(45) not null ,
+    aadhar_number varchar(12) not null unique,
+    aadhar_card  varchar(100) ,
+    identity_proof varchar(100),
+    email varchar(25),
+    image varchar(100),
+    reliability_rating decimal,
+    review varchar(100),
+    foreign key (phone_number_code) references phone_number(phone_number_code)
+);
+create table property 
+(
+    property_code varchar(45) not null unique primary key,
+    owner_code varchar(45) not null ,
+    approval_code varchar(45) not null unique ,
+    name varchar(45) not null,
+    address_code varchar(45) not null ,
+    property_type varchar(45) not null,
+    year_of_cons date,
+    broker_code varchar(45) ,
+    property_image varchar(100),
+    foreign key(owner_code) references owner(owner_code),
+    foreign key(address_code) references address(address_code),
+    foreign key(approval_code) references approval(approval_code)
+);
+create table login_info
+(
+    code varchar(45) not null unique primary  key,
+    password varchar(20) not null 
+);
+create table payment
+(
+transaction_code varchar(45) not null unique primary key,
+buyer_code varchar(45) not null ,
+approval_code varchar(45) not null,
+transaction_type varchar (45) not null,
+time_of_transfer time not null,
+date_of_transfer time not null,
+buyer_acc_scode varchar(45) not null ,
+owner_acc_scode varchar(45) not null,
+approval_status varchar(45) ,
+property_code varchar(45) not null ,
+broker_code varchar(45) not null ,
+owner_code varchar(45) not null ,
+foreign key(buyer_code) references buyer(buyer_code),
+foreign key(approval_code) references approval(approval_code),
+foreign key(buyer_acc_scode) references bank_acc_info(search_code),
+foreign key (owner_acc_scode)references bank_acc_info(search_code),
+foreign key(property_code) references property(property_code),
+foreign key(broker_code) references broker(broker_code),
+foreign key(owner_code) references owner(owner_code)
+);
+create table rental 
+(
+    property_subcode varchar(45) not null unique primary key,
+    property_code varchar(45) not null,
+    approval_code varchar(45) not null,
+    broker_code varchar(45) ,
+    security_deposit decimal not null,
+    maintenance decimal not null,
+    average_water_tax decimal not null,
+    average_eb_bill decimal not null,
+    rent_hike decimal,
+    rent decimal not null,
+	foreign key(property_code) references property(property_code),
+    foreign key(approval_code) references approval(approval_code),
+    foreign key(broker_code) references broker(broker_code)
+);
+create table property_bidding 
+(
+    bid_code varchar(45) not null unique primary key,
+    property_code varchar(45) not null ,
+    approval_code varchar(45) not null unique,
+    acceptance varchar(45) not null,
+    bid_value decimal not null,
+    bid_status varchar(45) not null,
+    buyer_code varchar(45) not null ,
+    foreign key(property_code) references property(property_code),
+    foreign key(approval_code) references approval(approval_code),
+    foreign key(buyer_code) references buyer(buyer_code)
+);
+create table registration
+(
+    registration_code varchar(45) not null unique primary key,
+    property_code varchar(45) not null ,
+    approval_code varchar(45) not null unique ,
+    transaction_code varchar(45) not null unique,
+    date_of_reg date not null,
+    stamp_value decimal not null,
+    owner_code varchar(45) not null ,
+    buyer_code varchar(45) not null ,
+    foreign key(property_code) references property(property_code),
+    foreign key(approval_code) references approval(approval_code),
+    foreign key(transaction_code) references payment(transaction_code),
+    foreign key(buyer_code) references buyer(buyer_code),
+    foreign key(owner_code) references owner(owner_code)    
+);
+create table geographic_advantage
+(
+    property_code varchar(45) not null unique primary key ,
+    market decimal,
+    school decimal,
+    airport decimal,
+    raw_materials decimal,
+    hospitals decimal,
+    library decimal,
+    foreign key(property_code) references property(property_code)
+);
+create table amenities 
+(
+    property_code varchar(45) not null unique primary key,
+    clubhouse integer,
+    pool integer,
+    play_ground integer,
+    assistance integer,
+    security_facility integer,
+     foreign key(property_code) references property(property_code)
+);
+create table tenants
+(
+    property_subcode varchar(45) not null, 
+    tenant_code varchar(45) not null unique primary key,
+    phone_number_code varchar(45) not null,
+    aadhar_number varchar(12) not null unique,
+    aadhar_card  varchar(100) ,
+    identity_proof varchar(100),
+    email varchar(25),
+    image varchar(100),
+    foreign key (phone_number_code) references phone_number(phone_number_code),
+    foreign key (property_subcode) references rental(property_subcode)
+);
+create table coliving
+(
+    property_subcode varchar(45) not null unique primary key,
+    property_code varchar(45) not null ,
+    current_tenant varchar(45) not null ,
+    broker_code varchar(45)  ,
+    foreign key (property_subcode) references rental(property_subcode),
+    foreign key (broker_code) references  broker(broker_code),
+    foreign key (property_code) references property(property_code),
+    foreign key (current_tenant) references tenants(tenant_code)    
+);
+create table property_documentation
+(
+    property_code varchar(45) not null unique primary key,
+    document_code varchar(45) not null unique,
+    document varchar(100) not null,
+    document_legitimacy varchar(45),
+     foreign key(property_code) references property(property_code)
+);
+ 
 
