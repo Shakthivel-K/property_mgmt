@@ -216,8 +216,9 @@ create table amenities
 );
 create table tenants
 (
-    property_subcode varchar(45) not null, 
+     
     tenant_code varchar(45) not null unique primary key,
+    property_subcode varchar(45) not null,
     phone_number_code varchar(45) not null,
     aadhar_number varchar(12) not null unique,
     aadhar_card  varchar(100) ,
