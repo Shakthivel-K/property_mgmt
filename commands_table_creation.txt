@@ -45,12 +45,17 @@ create table admin_clearance
     land_app_right integer,
     home_app_right integer,
     approval_cap decimal,
-    seller_app_right integer,
+    seller_app_right integer,    
+    transaction_cap decimal,    
+    dbms_access_type varchar(45),
+    foreign key (admin_code) references administrator(admin_code),
+    foreign key(dbms_access_type) references dbms_acces(dbms_access_type)
+);
+create table dbms_access
+(
+    dbms_access varchar(45) not null primary key unique,
     broker_elm_right integer,
-    transaction_cap decimal,
-    profile_deletion_right integer,
-    dbms_access varchar(45),
-    foreign key (admin_code) references administrator(admin_code)
+    profile_deletion_right integer
 );
 create table approval
 (
@@ -237,70 +242,4 @@ create table property_documentation
     document_legitimacy varchar(45),
      foreign key(property_code) references property(property_code)
 );
- 
-///adminstrator 
-insert into  adminstrator values(101,"rahul", 901,123456801742,"image","image","coimbatore",10001,"killer123@gmail.com");
-insert into  adminstrator values(102,"arjun",902,123456123139,"image","image","banglore",10002,"arjun123@gmail.com");
-insert into  adminstrator values(103,"kurup",903,123423431712,"image","image","chennai",10003,"kurup123@gmail.com");
-insert into  adminstrator values(103,"sudhkar",904,12345680145,"image","image"," salem",10004,"sudkhar123@gmail.com");
-insert into  adminstrator values(104,"tamil",905,123456801790,"image","image","madurai",10005,"tamil123@gmail.com");
-insert into  adminstrator values(105,"david",906,1234568017412,"image","image","mumbai",10006,"david123@gmail.com");
-insert into  adminstrator values(106,"james",907,1234568011234,"image","image","coimbatore",10007,"james123@gmail.com");
-insert into  adminstrator values(106,"mike",908,123456801790,"image","image","chennai",10008,"james123@gmail.com");
-insert into  adminstrator values(107,"tyson",909,123456801713,"image","image","trichy",100010,"tyson123@gmail.com");
-insert into  adminstrator values(108,"ameer",9010,123456801718,"image","image","trippur",100011,"ameer@gmail.com");
-
-owner_code varchar(45) not null unique primary key,
-    name varchar(45) not null,
-    phone_number_code varchar(45) not null ,
-    aadhar_number varchar(12) not null unique,
-    aadhar_card  varchar(100) ,
-    identity_proof varchar(100),
-    email varchar(25),
-    image varchar(100),
-    reliability_rating decimal,
-    foreign key(phone_number_code) references phone_number(phone_number_code)
-/// owner
-
-
-insert into buyer values(301,"navin",9012,213490127860,"image","image,"navin@gmail.com","image");
-insert into buyer values(302,"harsth",9013,213490127213,"image","image,"hars@gmail.com","image");
-insert into buyer values(303,"jaydev",9014,21349083434,"image","image,"jay@gmail.com","image");
-insert into buyer values(304,"hiram",9015,2134901273463,"image","image,"hirm@gmail.com","image");
-insert into buyer values(305,"adrash",9016,213490127105,"image","image,"adrash@gmail.com","image");
-insert into buyer values(306,"kumresh",9017,213490127123,"image","image,"kumn@gmail.com","image");
-insert into buyer values(307,"sankar",9018,21349012734,"image","image,"sankar@gmail.com","image");
-insert into buyer values(308,"sureh",9019,213490127843,"image","image,"suresh@gmail.com","image");
-insert into buyer values(309,"ujwal",9020,213490122432,"image","image,"ujwal@gmail.com","image");
-
-create table broker
-(
-    broker_code varchar(45) not null unique primary key,
-    name varchar(45) not null,
-    phone_number_code varchar(45) not null ,
-    aadhar_number varchar(12) not null unique,
-    aadhar_card  varchar(100) ,
-    identity_proof varchar(100),
-    email varchar(25),
-    image varchar(100),
-    reliability_rating decimal,
-    review varchar(100),
-    foreign key (phone_number_code) references phone_number(phone_number_code)
-);
-//broker
-insert into broker values(501,"arun",9021,432178902490,"image","image","arun@gmail.com","image",10,"very good");
-insert into broker values(502,"kumar",9021,432178902691,"image","image","ashwin@gmail.com","image",8.4,"good");
-insert into broker values(503,"ashwin",9021,432178902610,"image","image","ashwin@gmail.com","image",7.0,"satisfactory");
-insert into broker values(504,"mahesh",9021,4321789026721"image","image","mahesh@gmail.com","image",4.2,"poor");
-insert into broker values(505,"karthik",9021,432178902678,"image","image","karthik@gmail.com","image",8.5,"good");
-insert into broker values(506,"kailash",9021,432178902675,"image","image","kailash@gmail.com","image",8.0,"good");
-insert into broker values(507,"deepak",9021,432178902672,"image","image","deepak@gmail.com","image",10,"very good");
-insert into broker values(508,"ragva",9021,432178902673,"image","image","ragva@gmail.com","image",6.0,"satisfactory");
-insert into broker values(509,"sahil",9021,432178902677,"image","image","sah@gmail.com","image",7.5,"okay");
-insert into broker values(5010,"uvan",9021,432178902679,"image","image","uvan@gmail.com","image",9.0,"good");
-
-
-
-
-
 
