@@ -233,7 +233,6 @@ create table coliving
 (
     coliving_code not null unique primary key,
     property_subcode varchar(45) not null,
-    property_code varchar(45) not null ,
     current_tenant varchar(45) not null ,
     broker_code varchar(45)  ,
     foreign key (property_subcode) references rental(property_subcode),
