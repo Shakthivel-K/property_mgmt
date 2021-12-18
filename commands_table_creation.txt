@@ -49,6 +49,7 @@ create table admin_clearance
     broker_elm_right integer,
     transaction_cap decimal,
     profile_deletion_right integer,
+    dbms_access varchar(45),
     foreign key (admin_code) references administrator(admin_code)
 );
 create table approval
