@@ -248,4 +248,13 @@ create table property_documentation
     document_legitimacy varchar(45),
      foreign key(property_code) references property(property_code)
 );
-
+create table property_characteristics
+(
+    property_code varchar(45) not null unique primary key,
+    land_area decimal,
+    builtup_area decimal,
+    parking_area decimal,
+    property_value decimal,
+    bid_starting decimal,
+    foreign key(property_code) references property(property_code)
+);
