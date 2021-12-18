@@ -212,7 +212,7 @@ create table amenities
     play_ground integer,
     assistance integer,
     security_facility integer,
-     foreign key(property_code) references property(property_code)
+    foreign key(property_code) references property(property_code)
 );
 create table tenants
 (
