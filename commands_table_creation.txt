@@ -44,7 +44,7 @@ create table bank_acc_info
 );
 create table dbms_access
 (
-    dbms_access varchar(45) not null primary key unique,
+    dbms_access_code varchar(45) not null primary key unique,
     broker_elm_right integer,
     profile_deletion_right integer
 );
