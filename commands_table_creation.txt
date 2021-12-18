@@ -229,7 +229,8 @@ create table tenants
 );
 create table coliving
 (
-    property_subcode varchar(45) not null unique primary key,
+    coliving_code not null unique primary key,
+    property_subcode varchar(45) not null,
     property_code varchar(45) not null ,
     current_tenant varchar(45) not null ,
     broker_code varchar(45)  ,
