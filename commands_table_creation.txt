@@ -117,6 +117,7 @@ create table property
     year_of_cons date,
     broker_code varchar(45) ,
     property_image varchar(100),
+    status varchar(25),
     foreign key(owner_code) references owner(owner_code),
     foreign key(address_code) references address(address_code),
     foreign key(approval_code) references approval(approval_code)
