@@ -24,7 +24,7 @@ create table administrator
     aadhar_card varchar(100) not null,
     office_location varchar(20) not null,
     personal_address_code varchar(45) not null,
-    email varchar(25),
+    email varchar(75),
     foreign key (phone_number_code) references phone_number(phone_number_code),
     foreign key (personal_address_code) references address(address_code)
 );
@@ -73,7 +73,7 @@ create table buyer
     phone_number_code varchar(45) not null unique ,
     aadhar_number varchar(12) not null unique,
     image varchar(100) not null,
-    email varchar(25) not null,
+    email varchar(75) not null,
     foreign key (phone_number_code) references phone_number(phone_number_code)
 );
 create table owner
@@ -84,7 +84,7 @@ create table owner
     aadhar_number varchar(12) not null unique,
     aadhar_card  varchar(100) ,
     identity_proof varchar(100),
-    email varchar(25),
+    email varchar(75),
     image varchar(100),
     reliability_rating decimal,
     foreign key(phone_number_code) references phone_number(phone_number_code)
@@ -97,7 +97,7 @@ create table broker
     aadhar_number varchar(12) not null unique,
     aadhar_card  varchar(100) ,
     identity_proof varchar(100),
-    email varchar(25),
+    email varchar(75),
     image varchar(100),
     reliability_rating decimal,
     review varchar(100),
@@ -131,7 +131,7 @@ buyer_code varchar(45) not null ,
 approval_code varchar(45) not null,
 transaction_type varchar (45) not null,
 time_of_transfer time not null,
-date_of_transfer time not null,
+date_of_transfer date not null,
 buyer_acc_scode varchar(45) not null ,
 owner_acc_scode varchar(45) not null,
 property_code varchar(45) not null ,
@@ -221,7 +221,7 @@ create table tenants
     aadhar_number varchar(12) not null unique,
     aadhar_card  varchar(100) ,
     identity_proof varchar(100),
-    email varchar(25),
+    email varchar(75),
     image varchar(100),
     foreign key (phone_number_code) references phone_number(phone_number_code),
     foreign key (property_subcode) references rental(property_subcode)

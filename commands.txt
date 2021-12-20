@@ -136,7 +136,6 @@ insert into administrator values ('a9','Sri','9','100000000009','/static/person.
 insert into administrator values ('a10','Aditi','10','10000000010','/static/person.png','/static/aadharimage.jpg','manglore','addr10','aditiragavan@yahoo.com');
 insert into administrator values ('a11','Harshada','11','10000000011','/static/person.png','/static/aadharimage.jpg','erode','addr11','harshada@sun.com');
 insert into administrator values ('a12','Indu','12','10000000012','/static/person.png','/static/aadharimage.jpg','coimbatore','addr4','indumathi@hotmail.com');
-
 insert into bank_acc_info values ('bnk1','b1','279207566927',250,'a3','central_national_bank','verified');
 insert into bank_acc_info values ('bnk2','b2','65491414',150,'a1','territorial_bank','verified');
 insert into bank_acc_info values ('bnk3','b3','56493648',177,'a5','indian_bank','verified');
