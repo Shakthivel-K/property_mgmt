@@ -76,6 +76,6 @@ def parse_result(connector,query):
         res=results(header,query)
         return res
 
-parse_result(root_connection,query_buffer).display_cmd()
+
 
     
