@@ -55,6 +55,7 @@ for rows in reader:
             result=cursor.fetchall()
             connection.commit()
             writer.write(row)
+            writer.write("\n")
             k=0
         except Error as e:
             print("The error '{}' occurred".format(e))

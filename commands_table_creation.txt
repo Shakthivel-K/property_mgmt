@@ -2,8 +2,8 @@ create table phone_number
 (
     phone_number_code varchar(45) not null primary key,
     phone_number1 varchar(10) not null,
-    phone_number2 varchar(10) not null,
-    phone_number3 varchar(10) not null
+    phone_number2 varchar(10) ,
+    phone_number3 varchar(10) 
     
 );
 create table address
