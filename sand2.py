@@ -1,5 +1,5 @@
 import os
-reader =open("datas.csv","r")
+reader =open("datas-hrf-err.csv","r")
 writer=open ("commands.txt","a")
 enable_comma=1
 table_name=""
@@ -10,18 +10,19 @@ for row in reader:
         table_name=cells[1]
         ch.clear()
         for i in range(2,len(cells),1):
-            ch.append(cells[i].rstrip('\n'))
+            if (cells[i]!=''):
+                ch.append(cells[i].rstrip('\n'))
         print(ch)
         
     else:
         #writer.write("insert into "+table_name.rstrip('\n')+" values ("+row.rstrip('\n')+");\n")
         writer.write("insert into "+table_name.rstrip('\n')+" values (");
-        for i  in range(0,len(ch),1):
+        for i  in range(0,len(ch)-1,1):
             if ch[i]=="str":
                 writer.write("\'"+cells[i]+"\'")
             else :
                 writer.write(cells[i])
-            if  i==(len(ch)-1):
+            if  i==(len(ch)-2):
                     writer.write(");")
             else:
                 writer.write(",")
