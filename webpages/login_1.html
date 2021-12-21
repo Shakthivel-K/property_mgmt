@@ -147,16 +147,18 @@
     <body>
         <div class="login-box">
             <h2>Login</h2>
-            <form>
+            <form action="/login_1" method="post" id ="formm">
               <div class="user-box">
-                <input type="text" name="" required="">
-                <label>Username</label>
+
+                <input type="text" name="uname" required="" >
+                <label>Username {{ msg1 }}</label>
               </div>
               <div class="user-box">
-                <input type="password" name="" required="">
-                <label>Password</label>
+                <input type="password" name="pwd" required="">
+                <label>Password {{ msg2 }}</label>
+                
               </div>
-              <a href="#">
+              <a href="#" onclick="document.getElementById('formm').submit();">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -166,4 +168,5 @@
             </form>
           </div>
     </body>
+
     </html>
