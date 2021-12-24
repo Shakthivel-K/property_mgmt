@@ -575,7 +575,17 @@ insert into tenants values ('tnt22','psc3','kalpit','87','10000000087','/static/
 insert into tenants values ('tnt23','psc17','abishek','88','10000000088','/static/aadharimage.jpg','/static/aadharimage.jpg','abishek.peanutbutter@hotmail.com','/static/person.png');
 insert into tenants values ('tnt24','psc4','prabha','89','10000000089','/static/aadharimage.jpg','/static/aadharimage.jpg','prabharao@gmail.com','/static/person.png');
 insert into tenants values ('tnt25','psc9','subramaaiam','90','10000000090','/static/aadharimage.jpg','/static/aadharimage.jpg','subramaniam@hotmail.com','/static/person.png');
-insert into coliving values ('clng1','psc1','tnt1',NULL);insert into coliving values ('clng2','psc3','tnt4','brkr3');insert into coliving values ('clng3','psc17','tnt18','brkr13');insert into coliving values ('clng4','psc4','tnt24',NULL);insert into coliving values ('clng5','psc9','tnt25',NULL);insert into coliving values ('clng6','psc1','tnt2','brkr2');insert into coliving values ('clng7','psc3','tnt22','brkr12');insert into coliving values ('clng8','psc17','tnt23','brkr11');insert into coliving values ('clng9','psc4','tnt24','brkr5');insert into coliving values ('clng10','psc9','tnt25',NULL);insert into property_documentation values ('prop1','49931wifbjvcu4q','/static/document.png','verified');
+insert into coliving values ('clng1','psc1','tnt1',NULL);
+insert into coliving values ('clng2','psc3','tnt4','brkr3');
+insert into coliving values ('clng3','psc17','tnt18','brkr13');
+insert into coliving values ('clng4','psc4','tnt24',NULL);
+insert into coliving values ('clng5','psc9','tnt25',NULL);
+insert into coliving values ('clng6','psc1','tnt2','brkr2');
+insert into coliving values ('clng7','psc3','tnt22','brkr12');
+insert into coliving values ('clng8','psc17','tnt23','brkr11');
+insert into coliving values ('clng9','psc4','tnt24','brkr5');
+insert into coliving values ('clng10','psc9','tnt25',NULL);
+insert into property_documentation values ('prop1','49931wifbjvcu4q','/static/document.png','verified');
 insert into property_documentation values ('prop2','mbjhrzubj3i52yh','/static/document.png','verified');
 insert into property_documentation values ('prop3','tpv14b1gw3nb0jb','/static/document.png','verified');
 insert into property_documentation values ('prop4','notfs92b169sbdp','/static/document.png','verified');
