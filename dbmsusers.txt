@@ -1,0 +1,19 @@
+switching between users in terminal:
+system mysql -u user -p 
+
+1.-----------------
+username: root
+pwd: password
+port: 3306
+access: *
+description: root user 
+
+2.-----------------
+username: receptionist
+pwd: reception_pwd
+port: 3306
+access: GRANT SELECT ON `sand`.`login_info` TO `receptionist`@`localhost`
+description: temporary user validate credentials of website user
+
+3.-----------------
+username: 
