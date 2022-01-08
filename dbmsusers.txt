@@ -16,4 +16,7 @@ access: GRANT SELECT ON `sand`.`login_info` TO `receptionist`@`localhost`
 description: temporary user validate credentials of website user
 
 3.-----------------
-username: 
+username: owner
+pwd: owner_pwd
+port: 3306
+access: 

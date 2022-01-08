@@ -18,7 +18,7 @@ def login_page():
     if (request.method=="POST"):
         print("posted")
         receptionist=connections()
-        receptionist.create_connection("localhost","3306","receptionist","reception_pwd",db)
+        receptionist.create_connection("localhost","3306","root","password",db)
         query=queries()
         uname=request.form.get("uname")
         pwd=request.form.get("pwd")
