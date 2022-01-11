@@ -1,2 +1,11 @@
-1.login page for admin costmer owner page
-2.16 forms with the details of the table 
+basic syntax:
+connections :
+no special functions 
+only a single function to create a connection 
+
+queries:
+has result as a list or a string 
+
+results :
+has a header and displays info 
+onlyu obtainable after parse_result
